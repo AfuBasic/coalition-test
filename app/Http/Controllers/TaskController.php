@@ -87,14 +87,13 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->delete();
+        $this->taskService->deleteTask($task);
         return redirect()->route('project.tasks.index', $task->project->hashid)->with('success', 'Task deleted successfully');
     }
 
     public function handleTaskWithoutProject()
     {
         $project = Project::first();
-
         if (!$project) {
             return redirect()->route('projects.index')->with('error', 'Please create a project to view tasks');
         }

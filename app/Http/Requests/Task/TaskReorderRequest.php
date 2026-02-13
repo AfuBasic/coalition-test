@@ -24,7 +24,6 @@ class TaskReorderRequest extends FormRequest
         return [
             'task_ids' => 'required|array',
             'task_ids.*' => 'required|string',
-            'project_id' => 'required|exists:projects,id',
         ];
     }
 }

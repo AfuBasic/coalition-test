@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Task;
 
-use App\Requests\Concerns\DecodeHashIds;
+use App\Http\Requests\Concerns\DecodeHashIds;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

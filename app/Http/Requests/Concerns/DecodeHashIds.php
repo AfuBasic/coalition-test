@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Requests\Concerns;
+namespace App\Http\Requests\Concerns;
 
 use Hashids\Hashids;
 

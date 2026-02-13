@@ -15,7 +15,10 @@ class TaskServices
     {
         //
     }
-
+    public function deleteTask(Task $task)
+    {
+        $task->delete();
+    }
     public function reorderTasks($projectId, array $taskIds = [])
     {
         //To avoid unique constraints we temporarily set the ids to something else first before running the update
