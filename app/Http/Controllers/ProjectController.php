@@ -4,16 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Actions\Projects\CreateAction;
 use App\Http\Requests\Project\CreateRequest;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct(public ProjectService $projectService)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('projects.index');
+        return view('projects.index', [
+            'projects' => $this->projectService->projects()->through(function($project) {
+                return [
+                    'id' => $project->id,
+                    'name' => $project->name,
+                ];
+            })
+        ]);
     }
 
     /**

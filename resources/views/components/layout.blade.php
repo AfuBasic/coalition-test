@@ -44,7 +44,16 @@
 
     <main class="py-10 px-4">
         <div class="max-w-3xl mx-auto">
-
+            @if(session()->has('success'))
+            <div class="mb-5">
+                <x-alert type="success">{{ session('success') }}</x-alert>
+            </div>
+            @endif
+            @if(session()->has('error'))
+            <div class="mb-5">
+                <x-alert type="error">{{ session('error') }}</x-alert>
+            </div>
+            @endif
             <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
                 {{ $slot }}
             </div>
