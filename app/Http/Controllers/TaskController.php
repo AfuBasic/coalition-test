@@ -25,7 +25,7 @@ class TaskController extends Controller
                         ->projects()
                         ->get()
                         ->mapWithKeys(function($project){
-                            return [route('project.tasks.index', $project) => $project->name];
+                            return [route('project.tasks.index', $project->hashid) => $project->name];
                         })->toArray();
         
         return view('tasks.index',
@@ -99,6 +99,6 @@ class TaskController extends Controller
             return redirect()->route('projects.index')->with('error', 'Please create a project to view tasks');
         }
 
-        return redirect()->route('project.tasks.index', $project->id);
+        return redirect()->route('project.tasks.index', $project->hashid);
     }
 }
