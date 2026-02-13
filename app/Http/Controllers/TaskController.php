@@ -20,7 +20,7 @@ class TaskController extends Controller
      */
     public function index(Project $project)
     {
-        $tasks = $this->projectService->getTasks($project);
+        $tasks = $project->tasks()->latest('priority');
         $all_projects = $this->projectService
                         ->projects()
                         ->get()

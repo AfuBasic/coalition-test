@@ -25,9 +25,4 @@ class ProjectService
     {
         $project->delete();
     }
-
-    public function getTasks(Project $project): HasMany
-    {
-        return $project->tasks()->latest('updated_at');
-    }
 }

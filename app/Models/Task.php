@@ -26,13 +26,8 @@ class Task extends Model
     protected function projectId(): Attribute
     {
         return Attribute::make(
-            set: function ($value) {
-                if (is_numeric($value)) {
-                    return $value; // already raw id
-                }
-                
-                return app(Hashids::class)->decode($value)[0] ?? null;
-            }
+            get: fn ($value) => app(Hashids::class)->encode($value),
+            set: fn ($value) => is_numeric($value) ? $value : app(Hashids::class)->decode($value)[0] ?? null
         );
     }
 }

@@ -26,6 +26,7 @@ class ProjectController extends Controller
                 return [
                     'id' => $project->id,
                     'name' => $project->name,
+                    'hashid' => $project->hashid,
                 ];
             })
         ]);

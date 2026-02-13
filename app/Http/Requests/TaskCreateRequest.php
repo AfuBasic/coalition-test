@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TaskCreateRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class TaskCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'priority' => 'required|numeric|unique:tasks,priority',
+            'priority' => ['required','numeric', Rule::unique('tasks', 'priority')->where('project_id', $this->project_id)],
             'status' => 'required|string',
         ];
     }
