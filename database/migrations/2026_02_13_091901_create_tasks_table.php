@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Project::class);
             $table->string('name');
-            $table->string('description');
+            $table->enum('status', ['todo', 'in_progress', 'done'])->default('todo');
             $table->timestamps();
         });
     }

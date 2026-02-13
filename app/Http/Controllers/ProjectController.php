@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Project\UpdateAction;
 use App\Actions\Projects\CreateAction;
-use App\Http\Requests\Project\CreateRequest;
+use App\Http\Requests\Project\ProjectRequest;
+use App\Models\Project;
 use App\Services\ProjectService;
 use Illuminate\Http\Request;
 
@@ -39,7 +41,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateRequest $request, CreateAction $action)
+    public function store(ProjectRequest $request, CreateAction $action)
     {
         $action->execute($request->validated());
         return redirect()->route('projects.index')->with('success', 'Project created successfully');
@@ -48,25 +50,28 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit', [
+            'project' => $project
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjectRequest $request, Project $project, UpdateAction $action)
     {
-        //
+        $action->execute($project, $request->validated());
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully');
     }
 
     /**
