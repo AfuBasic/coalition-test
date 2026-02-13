@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Models\Project;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProjectService
 {
@@ -15,13 +16,18 @@ class ProjectService
         
     }
 
-    public function projects(): LengthAwarePaginator
+    public function projects(): Builder
     {
-        return Project::latest()->paginate(10);
+        return Project::latest();
     }
 
     public function deleteProject(Project $project): void
     {
         $project->delete();
+    }
+
+    public function getTasks(Project $project): HasMany
+    {
+        return $project->tasks()->latest('updated_at');
     }
 }

@@ -20,8 +20,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = $this->projectService->projects()->paginate(10);
         return view('projects.index', [
-            'projects' => $this->projectService->projects()->through(function($project) {
+            'projects' => $projects->through(function($project) {
                 return [
                     'id' => $project->id,
                     'name' => $project->name,

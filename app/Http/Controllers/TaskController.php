@@ -2,16 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Services\ProjectService;
+use App\Services\TaskServices;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct(public ProjectService $projectService, public TaskServices $taskService)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Project $project)
     {
-        return view('tasks.index');
+        $tasks = $this->projectService->getTasks($project);
+        return view('tasks.index',
+            [
+                'project' => $project,
+                'all_projects' => $this->projectService->projects()->get(),
+                'tasks' => $tasks->paginate()->through(function($task){
+                    return [
+                        'id' => $task->id,
+                        'name' => $task->name,
+                    ];
+                })
+            ]
+        );
     }
 
     /**
@@ -60,5 +79,16 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function handleTaskWithoutProject()
+    {
+        $project = Project::first();
+
+        if (!$project) {
+            return redirect()->route('projects.index')->with('error', 'Please create a project to view tasks');
+        }
+
+        return redirect()->route('project.tasks.index', $project->id);
     }
 }

@@ -16,8 +16,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Project::class);
             $table->string('name');
+            $table->integer('priority');
             $table->enum('status', ['todo', 'in_progress', 'done'])->default('todo');
             $table->timestamps();
+
+
+            $table->unique(['project_id', 'priority']);
         });
     }
 

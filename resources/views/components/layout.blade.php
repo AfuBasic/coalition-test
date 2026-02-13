@@ -31,7 +31,7 @@
             <a
             href="{{ route('tasks.index') }}"
             class="px-4 py-2 rounded-lg transition
-                    {{ request()->routeIs('tasks.index')
+                    {{ request()->routeIs('project.tasks.index')
                         ? 'bg-orange-600 text-white shadow'
                         : 'text-gray-600 hover:bg-gray-100' }}">
             Tasks
