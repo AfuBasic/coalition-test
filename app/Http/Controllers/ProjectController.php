@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Project\CreateAction;
 use App\Actions\Project\UpdateAction;
-use App\Actions\Projects\CreateAction;
 use App\Http\Requests\Project\ProjectRequest;
 use App\Models\Project;
 use App\Services\ProjectService;

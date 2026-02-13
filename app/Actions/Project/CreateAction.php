@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Projects;
+namespace App\Actions\Project;
 
 use App\Models\Project;
 
