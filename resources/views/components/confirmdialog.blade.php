@@ -1,5 +1,5 @@
 <div id="{{ $modalId }}"
-class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40">
+class="fixed p-5 inset-0 z-50 hidden items-center justify-center bg-black/40">
 
 <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-6">
     

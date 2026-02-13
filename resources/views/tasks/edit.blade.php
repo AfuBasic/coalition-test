@@ -6,6 +6,8 @@
     <form action="{{ route('tasks.update', $task->hashid) }}" method="POST">
         @csrf
         @method('PUT')
+        <input type="hidden" name="task_id" value="{{ $task->hashid }}">
+        <input type="hidden" name="project_id" value="{{ $project->hashid }}">
         <div class="mb-5">
             <x-input name="name" label="Task Name" type="text" placeholder="Task Name" value="{{ $task->name }}" />
         </div>
@@ -13,7 +15,7 @@
             <x-input name="priority" label="Priority" type="number" placeholder="Priority" value="{{ $task->priority }}" />
         </div>
         <div class="mb-5">
-            <x-select name="status" label="Status" :options="['todo' => 'ToDo', 'in_progress' => 'In Progress', 'done' => 'Done']" :selected="'todo'" />
+            <x-select name="status" label="Status" :options="['todo' => 'ToDo', 'in_progress' => 'In Progress', 'done' => 'Done']" :selected="$task && $task->status ? $task->status : 'todo'" />
         </div>
         <x-button type="submit" title="Update Task" />
     </form>

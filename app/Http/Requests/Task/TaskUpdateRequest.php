@@ -2,17 +2,26 @@
 
 namespace App\Http\Requests\Task;
 
+use App\Requests\Concerns\DecodeHashIds;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class TaskUpdateRequest extends FormRequest
 {
+    use DecodeHashIds;
+
+    protected array $hashIds = ['project_id', 'task_id'];
     /**
     * Determine if the user is authorized to make this request.
     */
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function prepareForValidation()
+    {
+        $this->decodeHashIds();
     }
     
     /**
@@ -24,7 +33,7 @@ class TaskUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'priority' => ['required','numeric', Rule::unique('tasks', 'priority')->where('project_id', $this->project_id)->ignore($this->task_id)],
+            'priority' => ['required','numeric', Rule::unique('tasks', 'priority')->where(fn($query) => $query->where('project_id', $this->input('project_id')))->ignore($this->input('task_id'))],
             'status' => 'required|string',
         ];
     }

@@ -11,10 +11,11 @@
             <x-alert>No projects found</x-alert>
         </div>
         @else
-        <div class="">
+        <div class="flex gap-4 flex-col">
             @foreach ($projects as $project)
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between
                         gap-4 px-6 py-4
+                        border rounded-md border-gray-200
                         hover:bg-gray-50
                         transition">
                     <p>{{ $project['name'] }}</p>

@@ -25,17 +25,19 @@
             </div>
         </div>
         
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-row items-center justify-between gap-4">
             <h3 class="text-xl font-semibold text-gray-900">
                 Tasks
             </h3>
             
+            <div>
             <x-button
             link
             href="{{ route('project.tasks.create', $project->hashid) }}"
             title="Create Task"
-            class="w-full sm:w-auto"
             />
+            </div>
+
             
         </div>
         
@@ -74,9 +76,9 @@
             @endphp
 
             <div data-id="{{ $task->hashid }}" class="cursor-pointer mb-5 border border-gray-200 rounded-l-md border-l-4 {{ $style['border'] }}
-                        flex flex-col sm:flex-row items-center sm:justify-between gap-4 px-6 py-4 hover:bg-gray-50 transition
+                        flex flex-col sm:flex-row sm:justify-between gap-4 px-6 py-4 hover:bg-gray-50 transition
                     ">
-            <div class="flex-1 space-y-1">
+            <div class="space-y-1">
                 <p class="text-sm font-medium text-gray-900">
                     {{ $task->name }}
                 </p>
@@ -87,7 +89,7 @@
                 
             </div>
             
-            <div class="flex items-center gap-5 text-xs">
+            <div class="flex items-center justify-end gap-5 text-xs">
                 
                 <a href="{{ route('tasks.edit', $task->hashid) }}"
                     class="text-gray-500 hover:text-gray-800 transition">
@@ -127,6 +129,18 @@ message="This action cannot be undone. Are you sure you want to delete this task
                 order.push($(this).data('id'));
             })
             console.log(order);
+
+            $.ajax({
+                url: "{{ route('project.tasks.reorder', $project->hashid) }}",
+                type: "POST",
+                data: {
+                    task_ids: order,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         }
     })
 </script>

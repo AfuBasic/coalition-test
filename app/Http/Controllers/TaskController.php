@@ -99,4 +99,12 @@ class TaskController extends Controller
 
         return redirect()->route('project.tasks.index', $project->hashid);
     }
+
+    public function reorderTasks(Project $project, Request $request)
+    {
+        $this->taskService->reorderTasks($project->id, $request->task_ids);
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }

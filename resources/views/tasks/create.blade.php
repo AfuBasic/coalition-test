@@ -5,7 +5,7 @@
     </div>
     <form action="{{ route('project.tasks.store', $project->hashid) }}" method="POST">
         @csrf
-        <input type="hidden" name="project_id" value="{{ $project->id }}">
+        <input type="hidden" name="project_id" value="{{ $project->hashid }}">
         <div class="mb-5">
             <x-input name="name" label="Task Name" type="text" placeholder="Task Name" />
         </div>

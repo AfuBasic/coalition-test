@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Task;
 
-use Hashids\Hashids;
+use App\Requests\Concerns\DecodeHashIds;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class TaskCreateRequest extends FormRequest
 {
+    protected array $hashIds = ['project_id'];
+    use DecodeHashIds;
     /**
     * Determine if the user is authorized to make this request.
     */
@@ -15,8 +17,14 @@ class TaskCreateRequest extends FormRequest
     {
         return true;
     }
+    /**
+     * Decode project id to prepare for validation
+     */
+    public function prepareForValidation()
+    {
+        $this->decodeHashIds();
+    }
 
-    
     /**
     * Get the validation rules that apply to the request.
     *
