@@ -17,6 +17,11 @@ class ProjectService
 
     public function projects(): LengthAwarePaginator
     {
-        return Project::paginate(10);
+        return Project::latest()->paginate(10);
+    }
+
+    public function deleteProject(Project $project): void
+    {
+        $project->delete();
     }
 }
