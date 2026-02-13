@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Task\CreateAction;
+use App\Http\Requests\TaskCreateRequest;
 use App\Models\Project;
 use App\Services\ProjectService;
 use App\Services\TaskServices;
@@ -19,9 +21,13 @@ class TaskController extends Controller
     public function index(Project $project)
     {
         $tasks = $this->projectService->getTasks($project);
-        $all_projects = $this->projectService->projects()->get()->mapWithKeys(function($project){
-            return [route('project.tasks.index', $project) => $project->name];
-        })->toArray();
+        $all_projects = $this->projectService
+                        ->projects()
+                        ->get()
+                        ->mapWithKeys(function($project){
+                            return [route('project.tasks.index', $project) => $project->name];
+                        })->toArray();
+        
         return view('tasks.index',
             [
                 'project' => $project,
@@ -39,17 +45,18 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        return view('tasks.create', ['project' => $project]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskCreateRequest $request, CreateAction $createAction, Project $project)
     {
-        //
+        $createAction->execute($project, $request->validated());
+        return redirect()->route('project.tasks.index', $project)->with('success', 'Task created successfully');
     }
 
     /**

@@ -1,13 +1,13 @@
 <x-layout title="Tasks">
     <div class="flex flex-col">
-        <div class="flex justify-between border-b border-b-gray-300 mb-8">
-            <p>Projects</p>
+        <div class="flex justify-between items-center pb-2 border-b border-b-gray-300 mb-8">
+            <p>Current Project</p>
             <div>
                 <x-select name="project" onchange="window.location = this.value" :options="$all_projects" :selected="route('project.tasks.index', $project->id)"/>
             </div>
         </div>
         <div class="flex justify-between items-center mb-5">
-            <h2>Tasks | {{ $project->name }}</h2>
+            <h2><b>{{ $project->name }}: </b> Tasks</h2>
             <div class="">
                 <x-button link href="{{ route('project.tasks.create', $project->id) }}" title="Create Task"></x-button>
             </div>
