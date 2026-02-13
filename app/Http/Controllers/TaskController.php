@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Task\CreateAction;
-use App\Http\Requests\TaskCreateRequest;
+use App\Http\Requests\Task\TaskCreateRequest;
+use App\Http\Requests\Task\TaskUpdateRequest;
 use App\Models\Project;
+use App\Models\Task;
 use App\Services\ProjectService;
 use App\Services\TaskServices;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class TaskController extends Controller
      */
     public function index(Project $project)
     {
-        $tasks = $project->tasks()->latest('priority');
+        $tasks = $project->tasks()->select('id', 'name', 'priority','status')->oldest('priority');
         $all_projects = $this->projectService
                         ->projects()
                         ->get()
@@ -32,12 +34,7 @@ class TaskController extends Controller
             [
                 'project' => $project,
                 'all_projects' => $all_projects,
-                'tasks' => $tasks->paginate()->through(function($task){
-                    return [
-                        'id' => $task->id,
-                        'name' => $task->name,
-                    ];
-                })
+                'tasks' => $tasks->get()
             ]
         );
     }
@@ -56,7 +53,7 @@ class TaskController extends Controller
     public function store(TaskCreateRequest $request, CreateAction $createAction, Project $project)
     {
         $createAction->execute($project, $request->validated());
-        return redirect()->route('project.tasks.index', $project)->with('success', 'Task created successfully');
+        return redirect()->route('project.tasks.index', $project->hashid)->with('success', 'Task created successfully');
     }
 
     /**
@@ -70,17 +67,18 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', ['task' => $task, 'project' => $task->project]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TaskUpdateRequest $request, Task $task)
     {
-        //
+        $task->update($request->validated());
+        return redirect()->route('project.tasks.index', $task->project->hashid)->with('success', 'Task updated successfully');
     }
 
     /**

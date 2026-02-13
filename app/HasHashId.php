@@ -11,11 +11,6 @@ trait HasHashId
         return new Hashids(config('hashids.connections.main.salt'), config('hashids.connections.main.length'), config('hashids.connections.main.alphabet'));
     }
 
-    public function getRawId(): int
-    {
-        return $this->attributes['id'];
-    }
-
     public function getHashidAttribute()
     {
         return $this->hashids()->encode($this->attributes['id']);
