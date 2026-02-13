@@ -29,7 +29,7 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => '',
+            'salt' => 'kljs834jsnhu4Sgh7#$7dhk3nuSD373$34',
             'length' => 32,
             'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
         ],

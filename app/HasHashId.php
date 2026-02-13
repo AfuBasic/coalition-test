@@ -7,7 +7,7 @@ use Hashids\Hashids;
 trait HasHashId
 {
     public function hashids(): Hashids {
-        return new Hashids(config('hashids.main.salt'), config('hashids.main.length'), config('hashids.main.alphabet'));
+        return new Hashids(config('hashids.connections.main.salt'), config('hashids.connections.main.length'), config('hashids.connections.main.alphabet'));
     }
 
     public function getIdAttribute($value): string {
