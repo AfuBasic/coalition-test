@@ -19,10 +19,13 @@ class TaskController extends Controller
     public function index(Project $project)
     {
         $tasks = $this->projectService->getTasks($project);
+        $all_projects = $this->projectService->projects()->get()->mapWithKeys(function($project){
+            return [route('project.tasks.index', $project) => $project->name];
+        })->toArray();
         return view('tasks.index',
             [
                 'project' => $project,
-                'all_projects' => $this->projectService->projects()->get(),
+                'all_projects' => $all_projects,
                 'tasks' => $tasks->paginate()->through(function($task){
                     return [
                         'id' => $task->id,

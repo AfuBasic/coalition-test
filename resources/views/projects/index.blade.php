@@ -8,7 +8,7 @@
         </div>
         @if($projects->count() === 0)
         <div class="text-center my-5 text-gray-500">
-            <p>No projects found</p>
+            <x-alert>No projects found</x-alert>
         </div>
         @else
         <div class="">
