@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ProjectController::class, 'index']);
 Route::get('/tasks', [TaskController::class, 'handleTaskWithoutProject'])->name('tasks.index');
 Route::resource('projects', ProjectController::class)->except(['show']);
-Route::resource('project.tasks', TaskController::class)->shallow();
+Route::resource('project.tasks', TaskController::class)->shallow()->except('show');
 
 //This route persists the reordering for the tasks
 Route::post('/project/{project}/tasks/reorder', [TaskController::class, 'reorderTasks'])->name('project.tasks.reorder');

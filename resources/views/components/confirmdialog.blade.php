@@ -2,15 +2,12 @@
 class="fixed p-5 inset-0 z-50 hidden items-center justify-center bg-black/40">
 
 <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-6">
-    
     <h2 class="text-lg font-semibold mb-2">
         {{ $title }}
     </h2>
-    
     <p class="text-sm text-gray-500 mb-6">
         {{ $message }}
     </p>
-    
     <div class="flex justify-end gap-3">
         <button
         type="button"
