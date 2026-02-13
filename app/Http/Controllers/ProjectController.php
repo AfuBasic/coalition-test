@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Projects\CreateAction;
+use App\Http\Requests\Project\CreateRequest;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -19,15 +21,16 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request, CreateAction $action)
     {
-        //
+        $action->execute($request->validated());
+        return redirect()->route('projects.index')->with('success', 'Project created successfully');
     }
 
     /**

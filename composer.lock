@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AfuBasic/Laravel-Utilities.git",
-                "reference": "c0b143d6c26b47513089f21fc0749e94ea6324c5"
+                "reference": "f55417ce29fab2f266cebcd2dff869a7cb8f8e88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AfuBasic/Laravel-Utilities/zipball/c0b143d6c26b47513089f21fc0749e94ea6324c5",
-                "reference": "c0b143d6c26b47513089f21fc0749e94ea6324c5",
+                "url": "https://api.github.com/repos/AfuBasic/Laravel-Utilities/zipball/f55417ce29fab2f266cebcd2dff869a7cb8f8e88",
+                "reference": "f55417ce29fab2f266cebcd2dff869a7cb8f8e88",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "issues": "https://github.com/AfuBasic/Laravel-Utilities/issues",
                 "source": "https://github.com/AfuBasic/Laravel-Utilities/tree/main"
             },
-            "time": "2026-01-06T10:32:56+00:00"
+            "time": "2026-02-13T10:13:04+00:00"
         },
         {
             "name": "brick/math",
