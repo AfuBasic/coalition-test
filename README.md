@@ -35,4 +35,5 @@ npm run dev
 
 ## Packages
 
-- **Packages:** `vinkla/hashids` (URL obfuscation), `afubasic/laravel-utilities` (To add the `php artisan make:action` command)
+- `vinkla/hashids` (URL obfuscation)
+- `afubasic/laravel-utilities` (To enable me add the `php artisan make:action` command)
