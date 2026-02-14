@@ -1,59 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Coalition Task Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple project and task management app built with **Laravel 12**, **Tailwind CSS 4**, and **Vite**. Create projects, add tasks with priorities and statuses, and reorder them via drag-and-drop.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- MySQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Extract the files from the zip file
+Make a copy of the .env.example file and name it .env
+Define the database credentials in the .env file
+Install the dependencies with `composer install`
+Run the migrations with `php artisan migrate`
+Install the front-end dependencies with `npm install`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 2. Install PHP dependencies
 
-## Laravel Sponsors
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 3. Create your environment file
 
-### Premium Partners
+cp .env.example .env
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 4. Generate the app key
 
-## Contributing
+php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 5. Configure your database
 
-## Code of Conduct
+# Open .env and set your MySQL credentials:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# DB_DATABASE=coalition
 
-## Security Vulnerabilities
+# DB_USERNAME=root
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# DB_PASSWORD=
 
-## License
+# 6. Run migrations
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+php artisan migrate
+
+# 7. Install front-end dependencies
+
+npm install
+
+````
+
+---
+
+## Running the App
+
+The easiest way is the built-in `dev` composer script, which starts the server, queue worker, log tail, and Vite all at once:
+
+```bash
+composer dev
+````
+
+Or run them individually:
+
+```bash
+# Terminal 1 – Laravel server
+php artisan serve
+
+# Terminal 2 – Vite dev server
+npm run dev
+```
+
+Then visit **http://localhost:8000**.
+
+---
+
+## Quick Setup (one-liner)
+
+```bash
+composer setup    # installs deps, copies .env, generates key, runs migrations, builds assets
+```
+
+---
+
+## Usage
+
+| Action               | How                                                |
+| -------------------- | -------------------------------------------------- |
+| **Create a project** | Click "Create Project" on the home page            |
+| **View tasks**       | Click "View" on any project                        |
+| **Add a task**       | Inside a project, click "Create Task"              |
+| **Edit / Delete**    | Use the links on each project or task card         |
+| **Reorder tasks**    | Drag and drop tasks — order is saved automatically |
+| **Switch projects**  | Use the project dropdown on the tasks page         |
+
+---
+
+## Running Tests
+
+```bash
+composer test
+# or
+php artisan test
+```
+
+---
+
+## Tech Stack
+
+- **Backend:** Laravel 12, PHP 8.2+
+- **Frontend:** Blade, Tailwind CSS 4, Vite, jQuery UI (drag-and-drop)
+- **Database:** MySQL
+- **Packages:** `vinkla/hashids` (URL obfuscation), `afubasic/laravel-utilities`
