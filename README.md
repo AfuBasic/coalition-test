@@ -26,10 +26,9 @@ A simple project and task management app built with **Laravel 12**, **Tailwind C
 - If you want to run them individually, use the following commands:
 
 ```bash
-# Terminal 1 – Laravel server
 php artisan serve
 
-# Terminal 2 – Vite dev server
+# Another terminal
 npm run dev
 ```
 
